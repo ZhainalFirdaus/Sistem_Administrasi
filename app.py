@@ -35,7 +35,9 @@ app.config['SECRET_KEY'] = _secret_key
 # -------------------------------------------------------
 # KEAMANAN: Konfigurasi Cookie Sesi yang Aman
 # -------------------------------------------------------
-app.config['SESSION_COOKIE_SECURE'] = False   # Ganti ke True jika sudah pakai HTTPS!
+# Otomatis aktifkan Secure Cookie di environment production (Railway pakai HTTPS)
+_is_production = os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('RAILWAY_PROJECT_ID')
+app.config['SESSION_COOKIE_SECURE'] = bool(_is_production)
 app.config['SESSION_COOKIE_HTTPONLY'] = True   # Cegah akses cookie via JavaScript
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Proteksi dasar CSRF
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # Sesi kadaluarsa setelah 1 jam
@@ -925,4 +927,7 @@ if __name__ == '__main__':
     print("  🌐 Akses di: http://127.0.0.1:5000")
     print("  📌 Tekan Ctrl+C untuk menghentikan server")
     print("="*50 + "\n")
-    app.run(host='127.0.0.1', port=5000, debug=False)
+    # Gunakan PORT dari environment variable (Railway) atau default 5000 (lokal)
+    port = int(os.environ.get('PORT', 5000))
+    host = '0.0.0.0' if os.environ.get('PORT') else '127.0.0.1'
+    app.run(host=host, port=port, debug=False)
