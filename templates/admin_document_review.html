@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocAdmin - Review Document</title>
+    <!-- Tailwind CSS & SweetAlert2 (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+    <!-- Sidebar -->
+    <aside class="w-[240px] bg-white border-r border-slate-100 flex flex-col flex-shrink-0 z-20 hidden md:flex">
+        <!-- Logo -->
+        <div class="h-16 flex items-center px-6 mt-2">
+            <div class="bg-blue-600 rounded-md text-white p-1.5 mr-3 flex-shrink-0">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path
+                        d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                </svg>
+            </div>
+            <h1 class="text-xl font-extrabold text-[#0f172a] tracking-tight">DocAdmin</h1>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+            <a href="{{ url_for('admin_dashboard') }}"
+                class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors">
+                <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Dashboard
+            </a>
+            <a href="{{ url_for('admin_users') }}"
+                class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors">
+                <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                Users
+            </a>
+            <a href="{{ url_for('admin_documents') }}"
+                class="flex items-center px-3 py-2 text-sm font-semibold rounded-lg bg-blue-50 text-blue-600">
+                <svg class="w-4 h-4 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                </svg>
+                Documents
+            </a>
+            <a href="{{ url_for('admin_reports') }}"
+                class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors">
+                <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Reports
+            </a>
+            <a href="{{ url_for('settings') }}"
+                class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors">
+                <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Settings
+            </a>
+        </nav>
+
+        <!-- Admin Profile -->
+        <div class="px-6 py-5 border-t border-slate-100 flex items-center justify-between mt-auto">
+            <div class="flex items-center">
+                <img src="https://ui-avatars.com/api/?name={{ current_user.name or current_user.nrp }}&background=cbd5e1&color=334155&bold=true"
+                    alt="Avatar" class="h-9 w-9 rounded-full object-cover border border-slate-200">
+                <div class="ml-3">
+                    <p class="text-[13px] font-bold text-slate-800 leading-tight">{{ (current_user.name or
+                        current_user.nrp) }}</p>
+                    <p class="text-[11px] text-slate-500 font-medium mt-0.5">Administrator</p>
+                </div>
+            </div>
+            <a href="{{ url_for('logout') }}" title="Logout"
+                class="text-slate-400 hover:text-slate-600 transition-colors p-1">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+
+        <!-- Top Header -->
+        <header
+            class="h-16 bg-white border-b border-slate-100 flex items-center justify-between px-8 flex-shrink-0 z-10">
+            <div class="flex items-center space-x-2 text-sm">
+                <a href="{{ url_for('admin_documents') }}"
+                    class="text-slate-400 hover:text-blue-600 transition-colors font-medium">Documents</a>
+                <svg class="h-3 w-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+                <span class="text-slate-800 font-bold">Review</span>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <!-- Notification Dropdown -->
+                <div class="relative group">
+                    <button class="relative text-slate-400 hover:text-slate-600 transition-colors p-1"
+                        onclick="markNotificationsRead()">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        {% if unread_count > 0 %}
+                        <span id="unread-badge"
+                            class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                        {% endif %}
+                    </button>
+                    <!-- Dropdown Content -->
+                    <div
+                        class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all transform origin-top-right scale-95 group-hover:scale-100 text-slate-800">
+                        <div class="px-4 py-3 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                            <h3 class="text-sm font-bold text-slate-800">Notifications</h3>
+                            <span class="text-[10px] font-bold text-blue-600 uppercase">{{ unread_count }} New</span>
+                        </div>
+                        <div class="max-h-96 overflow-y-auto divide-y divide-slate-100">
+                            {% if notifications %}
+                            {% for n in notifications %}
+                            <a href="{{ n.link or '#' }}"
+                                class="block px-4 py-3 hover:bg-slate-50 transition-colors cursor-pointer">
+                                <div class="flex items-start">
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <p class="text-[12px] text-slate-700 leading-snug font-medium">{{ n.message }}
+                                        </p>
+                                        <p class="text-[10px] text-slate-400 mt-1">{{ n.created_at.strftime('%H:%M') if
+                                            n.created_at.date() == n.created_at.now().date() else
+                                            n.created_at.strftime('%d %b') }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endfor %}
+                            {% else %}
+                            <div class="px-4 py-8 text-center text-slate-400 text-sm">No new notifications</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 pl-4 border-l border-slate-100 py-1">
+                    <img src="https://ui-avatars.com/api/?name={{ current_user.name or current_user.nrp }}&background=2563eb&color=fff&bold=true"
+                        class="h-7 w-7 rounded-full shadow-sm" alt="Admin">
+                    <span class="text-sm font-semibold text-slate-700 hidden lg:block">{{ (current_user.name or
+                        current_user.nrp) }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area - Split View -->
+        <div class="flex-1 flex overflow-hidden">
+
+            <!-- Left: Document Viewer -->
+            <div class="flex-1 flex flex-col border-r border-slate-100 bg-slate-50 relative">
+                <!-- Viewer Header -->
+                <div
+                    class="h-12 bg-white border-b border-slate-50 px-6 flex items-center justify-between flex-shrink-0">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
+                        </svg>
+                        <span class="text-[13px] font-bold text-slate-700 truncate max-w-xs">{{ document.file_name
+                            }}</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="{{ url_for('get_file_token', doc_id=document.id) }}"
+                            class="inline-flex items-center px-3 py-1 bg-white border border-slate-200 rounded text-[11px] font-bold text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
+                            <svg class="w-3 h-3 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Viewer Content -->
+                <div class="flex-1 relative overflow-hidden">
+                    <div id="viewer-loading"
+                        class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-50/80 backdrop-blur-[2px]">
+                        <div class="w-10 h-10 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin">
+                        </div>
+                        <p class="mt-4 text-[13px] font-bold text-slate-500 tracking-tight">Memuat Dokumen...</p>
+                    </div>
+
+                    <div id="viewer-content" class="h-full w-full hidden">
+                        {% set ext = document.file_name.split('.')[-1].lower() %}
+                        {% if ext in ['png', 'jpg', 'jpeg'] %}
+                        <div class="h-full w-full overflow-auto p-8 flex items-center justify-center">
+                            <img id="image-viewer"
+                                class="max-w-full h-auto shadow-2xl rounded-lg border border-slate-200" alt="Preview">
+                        </div>
+                        {% elif ext == 'pdf' %}
+                        <iframe id="pdf-viewer" class="w-full h-full border-0" frameborder="0"></iframe>
+                        {% else %}
+                        <div class="h-full w-full flex flex-col items-center justify-center p-12 text-center bg-white">
+                            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6">
+                                <svg class="w-10 h-10 text-slate-300" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2">Pratinjau Tidak Tersedia</h3>
+                            <p class="text-sm text-slate-500 max-w-sm mx-auto mb-8">Ekstensi file ini ({{ ext }}) tidak
+                                mendukung pratinjau langsung. Silakan unduh file untuk melihat kontennya.</p>
+                            <a href="{{ url_for('get_file_token', doc_id=document.id) }}"
+                                class="px-6 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition-all shadow-md shadow-blue-500/20">Unduh
+                                Dokumen</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div id="viewer-error"
+                        class="h-full w-full flex flex-col items-center justify-center p-12 text-center hidden bg-white">
+                        <div
+                            class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-4 text-red-500">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-1">Gagal Memuat</h3>
+                        <p class="text-sm text-slate-500">Terjadi kesalahan saat memuat pratinjau dokumen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Feedback Panel -->
+            <aside
+                class="w-[380px] bg-white flex flex-col flex-shrink-0 z-10 shadow-[-10px_0_15px_-3px_rgba(0,0,0,0.02)] border-l border-slate-50">
+                <div class="flex-1 overflow-y-auto p-8">
+                    <!-- Owner Info Card -->
+                    <div class="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
+                        <h3 class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-4">Informasi
+                            Pengunggah</h3>
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="h-11 w-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center font-bold text-blue-600 shadow-sm">
+                                {{ (document.owner.name or document.owner.nrp)[:1].upper() }}
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-[15px] font-bold text-slate-900 leading-none">{{ document.owner.name or
+                                    document.owner.nrp }}</p>
+                                <p class="text-[12px] text-slate-500 mt-1.5 font-medium">{{ document.owner.nrp }}</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-4 border-t border-slate-200/50">
+                            <div class="flex justify-between items-center text-[12px]">
+                                <span class="text-slate-500 font-medium">Status</span>
+                                <span
+                                    class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ 'bg-amber-100 text-amber-700' if document.status == 'Pending' else 'bg-green-100 text-green-700' if document.status == 'Approved' else 'bg-red-100 text-red-700' }}">
+                                    {{ document.status }}
+                                </span>
+                            </div>
+                            <div class="flex justify-between items-center text-[12px]">
+                                <span class="text-slate-500 font-medium">Diunggah</span>
+                                <span class="text-slate-800 font-bold tracking-tight">{{
+                                    document.created_at.strftime('%d %b %Y, %H:%M') }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Form -->
+                    <form action="{{ url_for('update_document_status') }}" method="POST" id="review-form">
+                        <input type="hidden" name="doc_id" value="{{ document.id }}">
+
+                        <div class="mb-6">
+                            <label
+                                class="block text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Beri
+                                Catatan / Feedback</label>
+                            <textarea name="comment" rows="6"
+                                placeholder="Tuliskan alasan penolakan atau revisi di sini..."
+                                class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-[13px] text-slate-700 placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none resize-none font-medium leading-relaxed">{{ document.admin_comment or '' }}</textarea>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-3">
+                            <button type="submit" name="status" value="Revisi"
+                                class="flex items-center justify-center py-2.5 px-4 bg-amber-50 text-amber-600 border border-amber-100 font-bold text-[13px] rounded-xl hover:bg-amber-100 transition-all">
+                                <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                Revisi
+                            </button>
+                            <button type="submit" name="status" value="Rejected"
+                                class="flex items-center justify-center py-2.5 px-4 bg-red-50 text-red-600 border border-red-100 font-bold text-[13px] rounded-xl hover:bg-red-100 transition-all">
+                                <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Reject
+                            </button>
+                        </div>
+
+                        <button type="submit" name="status" value="Approved"
+                            class="w-full flex items-center justify-center py-3.5 px-6 bg-blue-600 text-white font-bold text-[14px] rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98]">
+                            <svg class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            Approve Dokumen
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Helper Tip -->
+                <div class="p-8 pt-0 mt-auto">
+                    <div class="bg-blue-50/50 rounded-xl p-4 border border-blue-50 flex items-start">
+                        <svg class="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p class="ml-3 text-[11px] text-blue-700 leading-relaxed font-medium italic">
+                            Tip: Gunakan "Revisi" jika dokumen membutuhkan perbaikan minor, atapun "Reject" untuk
+                            penolakan total.
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Modals & Scripts -->
+    <script>
+        async function loadDocument() {
+            const loading = document.getElementById('viewer-loading');
+            const content = document.getElementById('viewer-content');
+            const error = document.getElementById('viewer-error');
+
+            {% set token = generate_file_token(document.file_path) %}
+            const fileExt = "{{ document.file_name.split('.')[-1].lower() }}";
+            const fileUrl = "{{ url_for('preview_file', token=token) }}";
+
+            if (!['pdf', 'png', 'jpg', 'jpeg'].includes(fileExt)) {
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const response = await fetch(fileUrl);
+                if (!response.ok) throw new Error('File not found');
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                if (fileExt === 'pdf') {
+                    const iframe = document.getElementById('pdf-viewer');
+                    if (iframe) iframe.src = blobUrl + "#toolbar=0";
+                } else {
+                    const img = document.getElementById('image-viewer');
+                    if (img) img.src = blobUrl;
+                }
+
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+            } catch (err) {
+                console.error('Viewer Error:', err);
+                loading.classList.add('hidden');
+                error.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDocument();
+
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            Swal.fire({
+                icon: '{{ "success" if category == "success" else "error" if category == "error" else "warning" }}',
+                title: '{{ "Berhasil" if category == "success" else "Terjadi Kesalahan" }}',
+                text: '{{ message }}',
+                confirmButtonColor: '#2563eb',
+            });
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        });
+    </script>
+</body>
+
+</html>

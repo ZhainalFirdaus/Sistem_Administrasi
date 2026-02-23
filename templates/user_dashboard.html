@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard User - DocAdmin</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons (More Stable) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .modal-backdrop {
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .stats-card {
+            transition: transform 0.2s ease, shadow 0.2s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="flex flex-col min-h-screen">
+        <!-- Top Navigation Bar -->
+        <header
+            class="sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-6 md:px-20 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="bg-primary p-2 rounded-lg flex items-center justify-center shadow-sm">
+                        <svg class="w-5 h-5 text-white" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">DocAdmin</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ url_for('settings') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-700 transition-all text-sm font-bold border border-slate-100 dark:border-slate-700 hover:text-blue-600">
+                        <span class="material-icons text-[18px]">settings</span>
+                        Settings
+                    </a>
+                    <a href="{{ url_for('logout') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-sm font-bold border border-slate-100 dark:border-slate-700">
+                        <span class="material-icons text-[18px]">logout</span>
+                        Keluar
+                    </a>
+                    <div class="h-9 w-9 rounded-full border-2 border-primary/20 p-0.5 hidden sm:block">
+                        <img alt="Profile" class="w-full h-full rounded-full object-cover"
+                            src="https://ui-avatars.com/api/?name={{ current_user.name or current_user.nrp }}&background=3c83f6&color=fff&bold=true" />
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 px-6 md:px-20 py-10 max-w-7xl mx-auto w-full">
+            <!-- Welcome Section -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div class="space-y-1">
+                    <h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Halo, {{
+                        current_user.name or current_user.nrp }}</h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Pantau dan kelola administrasi
+                        dokumen Anda dengan mudah.</p>
+                </div>
+                <button onclick="openModal()"
+                    class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-2xl transition-all shadow-lg shadow-primary/20 group">
+                    <span class="material-icons group-hover:scale-110 transition-transform">cloud_upload</span>
+                    Unggah Dokumen
+                </button>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <!-- Total Documents -->
+                <div
+                    class="stats-card bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5">
+                    <div class="p-3 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 flex-shrink-0">
+                        <span class="material-icons leading-none">folder</span>
+                    </div>
+                    <div>
+                        <p
+                            class="text-slate-400 dark:text-slate-500 text-[11px] font-extrabold uppercase tracking-widest leading-none mb-2">
+                            Total Dokumen</p>
+                        <p class="text-3xl font-black text-slate-800 dark:text-white leading-none">{{ total_count }}</p>
+                    </div>
+                </div>
+                <!-- Waiting for Verification -->
+                <div
+                    class="stats-card bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5">
+                    <div class="p-3 rounded-2xl bg-amber-50 dark:bg-amber-500/10 text-amber-600 flex-shrink-0">
+                        <span class="material-icons leading-none">watch_later</span>
+                    </div>
+                    <div>
+                        <p
+                            class="text-slate-400 dark:text-slate-500 text-[11px] font-extrabold uppercase tracking-widest leading-none mb-2">
+                            Menunggu Review</p>
+                        <p class="text-3xl font-black text-slate-800 dark:text-white leading-none">{{ waiting_count }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Need Revision -->
+                <div
+                    class="stats-card bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5">
+                    <div class="p-3 rounded-2xl bg-rose-50 dark:bg-rose-500/10 text-rose-600 flex-shrink-0">
+                        <span class="material-icons leading-none">error</span>
+                    </div>
+                    <div>
+                        <p
+                            class="text-slate-400 dark:text-slate-500 text-[11px] font-extrabold uppercase tracking-widest leading-none mb-2">
+                            Perlu Revisi</p>
+                        <p class="text-3xl font-black text-slate-800 dark:text-white leading-none">{{ revision_count }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Uploads Table Section -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="px-8 py-5 border-b border-slate-50 dark:border-slate-800 flex items-center justify-between">
+                    <h2 class="text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider">Aktivitas
+                        Terkini</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-500 text-[11px] font-extrabold uppercase tracking-widest">
+                                <th class="px-8 py-4">Nama Dokumen</th>
+                                <th class="px-8 py-4">Tanggal Unggah</th>
+                                <th class="px-8 py-4">Status</th>
+                                <th class="px-8 py-4">Komentar Admin</th>
+                                <th class="px-8 py-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                            {% if documents %}
+                            {% for doc in documents %}
+                            <tr class="hover:bg-slate-50/30 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="px-8 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="size-8 bg-blue-50 dark:bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-600">
+                                            <span class="material-icons text-[18px]">description</span>
+                                        </div>
+                                        <span class="font-bold text-slate-700 dark:text-slate-200 text-sm">{{
+                                            doc.file_name }}</span>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-5 text-slate-500 dark:text-slate-400 text-[13px] font-medium">
+                                    {{ doc.created_at.strftime('%d %b %Y') }}
+                                </td>
+                                <td class="px-8 py-5">
+                                    {% if doc.status == 'Approved' %}
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 border border-green-100 dark:border-green-800/50">
+                                        <span class="size-1.5 rounded-full bg-green-500"></span>
+                                        Disetujui
+                                    </span>
+                                    {% elif doc.status == 'Pending' %}
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-100 dark:border-amber-800/50">
+                                        <span class="size-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                        Pending
+                                    </span>
+                                    {% elif doc.status == 'Revisi' %}
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-100 dark:border-blue-800/50">
+                                        <span class="size-1.5 rounded-full bg-blue-500"></span>
+                                        Revisi
+                                    </span>
+                                    {% else %}
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-100 dark:border-rose-800/50">
+                                        <span class="size-1.5 rounded-full bg-rose-500"></span>
+                                        Ditolak
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-8 py-5 text-slate-500 dark:text-slate-400 text-sm italic">
+                                    {% if doc.admin_comment %}
+                                    "{{ doc.admin_comment }}"
+                                    {% else %}
+                                    <span class="text-slate-300 dark:text-slate-600">-</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-8 py-5 text-right flex items-center justify-end">
+                                    <button onclick="openEditModal('{{ doc.id }}', '{{ doc.file_name }}')"
+                                        class="p-2 text-slate-400 hover:text-blue-500 transition-colors"
+                                        title="Perbarui Dokumen">
+                                        <span class="material-icons text-[20px]">edit</span>
+                                    </button>
+                                    <button onclick="confirmDelete('{{ doc.id }}', '{{ doc.file_name }}')"
+                                        class="p-2 text-slate-400 hover:text-rose-500 transition-colors"
+                                        title="Hapus Dokumen">
+                                        <span class="material-icons text-[20px]">delete_outline</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="px-8 py-20 text-center text-slate-400 italic text-sm">
+                                    Belum ada dokumen yang diunggah.
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <footer class="mt-20 py-10 border-t border-slate-200 dark:border-slate-800 text-center">
+                <p class="text-slate-400 text-[11px] font-extrabold uppercase tracking-widest">© 2026 DocAdmin Internal
+                    System. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 modal-backdrop"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div
+                class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all border border-slate-100 dark:border-slate-800">
+                <div class="px-8 py-5 border-b border-slate-50 dark:border-slate-800 flex items-center justify-between">
+                    <h3 class="text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider">Unggah
+                        Dokumen Baru</h3>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <form action="{{ url_for('upload_document') }}" method="POST" enctype="multipart/form-data"
+                    class="p-8 space-y-6">
+                    <div class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center hover:border-primary/50 transition-colors cursor-pointer relative transition-all group"
+                        id="dropZone">
+                        <input type="file" name="document" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            onchange="handleFileSelect(this)">
+                        <div id="uploadPlaceholder">
+                            <span
+                                class="material-icons text-5xl text-slate-300 group-hover:text-primary/40 transition-colors mb-2 leading-none">cloud_upload</span>
+                            <p class="text-sm font-bold text-slate-600 dark:text-slate-400">Klik atau geser file ke sini
+                            </p>
+                            PNG (Max {{ max_upload_mb }}MB)</p>
+                        </div>
+                        <div id="fileInfo" class="hidden">
+                            <span
+                                class="material-icons text-5xl text-primary mb-2 leading-none">insert_drive_file</span>
+                            <p id="fileName" class="text-sm font-bold text-slate-900 dark:text-white truncate px-4"></p>
+                            <button type="button" onclick="resetFile()"
+                                class="text-[11px] font-black uppercase text-rose-500 mt-2 hover:underline">Ganti
+                                File</button>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary hover:bg-primary/90 text-white font-black py-4 rounded-2xl shadow-xl shadow-primary/20 transition-all uppercase tracking-widest text-xs">
+                        Selesaikan Unggahan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit/Update Modal -->
+    <div id="editModal" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 modal-backdrop"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div
+                class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all border border-slate-100 dark:border-slate-800">
+                <div class="px-8 py-5 border-b border-slate-50 dark:border-slate-800 flex items-center justify-between">
+                    <h3 class="text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider">Perbarui
+                        Dokumen</h3>
+                    <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <form id="editForm" action="" method="POST" enctype="multipart/form-data" class="p-8 space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Pilih
+                            File Baru</label>
+                        <div class="relative group">
+                            <input type="file" name="document" required
+                                class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl text-sm text-slate-600 dark:text-slate-300 file:hidden cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 transition-all">
+                            <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <span
+                                    class="material-icons text-slate-300 group-hover:text-blue-500 transition-colors">cloud_upload</span>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-[11px] text-slate-400 flex items-center gap-1">
+                            <span class="material-icons text-[14px]">info</span>
+                            Unggah versi terbaru untuk menggantikan file lama.
+                        </p>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-sm shadow-xl shadow-blue-500/20 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2">
+                        <span>Unggah Perubahan</span>
+                        <span class="material-icons text-[18px]">send</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openModal() {
+            document.getElementById('uploadModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('uploadModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            resetFile();
+        }
+
+        function openEditModal(id, filename) {
+            const modal = document.getElementById('editModal');
+            const form = document.getElementById('editForm');
+            form.action = `/edit_document/${id}`;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleFileSelect(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('uploadPlaceholder').classList.add('hidden');
+                document.getElementById('fileInfo').classList.remove('hidden');
+                document.getElementById('fileName').textContent = input.files[0].name;
+                document.getElementById('dropZone').classList.add('border-primary/40', 'bg-blue-50/20');
+            }
+        }
+
+        function resetFile() {
+            const input = document.querySelector('input[type="file"]');
+            input.value = '';
+            document.getElementById('uploadPlaceholder').classList.remove('hidden');
+            document.getElementById('fileInfo').classList.add('hidden');
+            document.getElementById('dropZone').classList.remove('border-primary/40', 'bg-blue-50/20');
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function confirmDelete(id, filename) {
+            Swal.fire({
+                title: 'Hapus Dokumen?',
+                text: `Anda akan menghapus file "${filename}". Tindakan ini tidak dapat dibatalkan.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f43f5e',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                background: document.documentElement.classList.contains('dark') ? '#0f172a' : '#ffffff',
+                color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#0f172a',
+                borderRadius: '1.5rem',
+                customClass: {
+                    title: 'font-black tracking-tight',
+                    popup: 'border border-slate-100 dark:border-slate-800 shadow-2xl'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = `/delete_document/${id}`;
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+    </script>
+
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- SweetAlert2 context integration (Flash Messages) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            Swal.fire({
+                icon: '{{ "success" if category == "success" else "error" }}',
+                title: '{{ "Berhasil" if category == "success" else "Kesalahan" }}',
+                text: '{{ message }}',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: document.documentElement.classList.contains('dark') ? '#1e293b' : '#ffffff',
+                color: document.documentElement.classList.contains('dark') ? '#f1f5f9' : '#1e293b'
+            });
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        });
+    </script>
+</body>
+
+</html>

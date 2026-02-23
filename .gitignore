@@ -1,0 +1,29 @@
+# .env - Jangan commit ke Git!
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyc
+*.pyd
+.Python
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Flask / Uploads
+instance/
+uploads/
+static/uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

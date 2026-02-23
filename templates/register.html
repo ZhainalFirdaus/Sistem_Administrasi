@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pendaftaran Akun - Sistem DocAdmin</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons (More stable version) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101722",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-icons {
+            font-size: 20px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display">
+    <!-- Top Navigation Bar -->
+    <header class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <div class="bg-primary/10 p-2 rounded-lg text-primary flex items-center justify-center">
+                        <span class="material-icons">description</span>
+                    </div>
+                    <span class="text-slate-900 dark:text-slate-100 text-lg font-bold tracking-tight">DocAdmin
+                        System</span>
+                </div>
+                <div>
+                    <a class="text-sm font-semibold text-primary hover:text-primary/80 transition-colors" href="#">
+                        Pusat Bantuan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Registration Content -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full">
+            <!-- Registration Card -->
+            <div
+                class="bg-white dark:bg-slate-900 shadow-xl rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <div class="p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Buat Akun Baru</h2>
+                        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                            Daftarkan data diri Anda untuk mengakses portal dokumen internal
+                        </p>
+                    </div>
+                    <form action="{{ url_for('register') }}" method="POST" class="space-y-5" id="registerForm"
+                        autocomplete="off">
+                        <!-- Nama Lengkap Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                                for="full_name">
+                                Nama Lengkap
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <span class="material-icons text-slate-400">person</span>
+                                </div>
+                                <input
+                                    class="block w-full pl-11 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary sm:text-sm transition-all shadow-sm"
+                                    id="full_name" name="full_name" placeholder="Masukkan nama lengkap" required=""
+                                    type="text" autocomplete="off" />
+                            </div>
+                        </div>
+
+                        <!-- NRP / No. Casis Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" for="nrp">
+                                NRP / No. Casis
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <span class="material-icons text-slate-400">badge</span>
+                                </div>
+                                <input
+                                    class="block w-full pl-11 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary sm:text-sm transition-all shadow-sm"
+                                    id="nrp" name="nrp" placeholder="NRP atau Nomor Casis" required="" type="text"
+                                    autocomplete="off" />
+                            </div>
+                            <p class="mt-1 text-xs text-slate-400 dark:text-slate-500 italic">Contoh: 12345678 atau
+                                prefix VIN</p>
+                        </div>
+
+                        <!-- Kata Sandi Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                                for="password">
+                                Kata Sandi
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <span class="material-icons text-slate-400">lock</span>
+                                </div>
+                                <input
+                                    class="block w-full pl-11 pr-11 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary sm:text-sm transition-all shadow-sm"
+                                    id="password" name="password" placeholder="Minimal 8 karakter" required=""
+                                    type="password" autocomplete="new-password" />
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <button
+                                        class="text-slate-400 hover:text-slate-600 focus:outline-none flex items-center"
+                                        type="button" id="togglePassword">
+                                        <span class="material-icons" id="eyeIcon">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button
+                                class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all uppercase tracking-wide"
+                                type="submit" id="submitBtn">
+                                <span id="btnText">Daftar Sekarang</span>
+                                <svg id="btnSpinner" class="animate-spin ml-2 h-5 w-5 text-white hidden"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="mt-8 relative">
+                        <div aria-hidden="true" class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-slate-200 dark:border-slate-800"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400">Sudah
+                                memiliki akun?</span>
+                        </div>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="mt-6">
+                        <a class="w-full flex justify-center items-center py-2 px-4 border border-slate-300 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                            href="{{ url_for('login') }}">
+                            <span class="material-icons text-lg mr-2">login</span>
+                            Masuk Saja
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Text -->
+            <div class="mt-8 text-center text-xs text-slate-400 dark:text-slate-500">
+                © 2026 Corporate Document Admin System. Seluruh hak cipta dilindungi.<br />
+                Hanya untuk penggunaan internal.
+            </div>
+        </div>
+    </main>
+
+    <!-- Background Pattern -->
+    <div class="fixed bottom-0 right-0 -z-10 opacity-10 dark:opacity-5">
+        <img alt="Pola abstrak" class="w-96 h-96 object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPLWHxJwFJlVyxVxHpWU53AaP8J-ESmyxAoFPaV_VnHPwfOW31FQoWksnEwQ5Hq6l50XzrgIMxgVZU2v3kbbVXAsAskMcjerFr51jJtm7Pylfv9t6OSpQECHZnYmx9T527UgeyGlRjA9s5rvAb4CgpMhq6DDp620vz_jBrctYdkIW9v3JoS7ptwe9S6H0jbqVov2hfNnQXr6tnpZKIw4sc7l6vzjqmDCpNsr04Ioe9ArLza_3FpK5wy5wQwdnOIJL4WxqtkOjjPSub" />
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Flash Messages (SweetAlert2)
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            Swal.fire({
+                icon: '{{ "success" if category == "success" else "error" if category == "error" else "warning" }}',
+                title: '{{ "Berhasil" if category == "success" else "Perhatian" }}',
+                text: '{{ message }}',
+                confirmButtonColor: '#3c83f6',
+                confirmButtonText: 'Tutup'
+            });
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            // Toggle Password
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordNode = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            togglePassword.addEventListener('click', () => {
+                const type = passwordNode.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordNode.setAttribute('type', type);
+                eyeIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            });
+
+            // Loading state
+            const registerForm = document.getElementById('registerForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            registerForm.addEventListener('submit', () => {
+                submitBtn.disabled = true;
+                btnText.textContent = "Memproses...";
+                btnSpinner.classList.remove('hidden');
+            });
+
+            // Force clear fields on load to prevent browser auto-fill
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const inputs = document.querySelectorAll('input');
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.setAttribute('autocomplete', 'one-time-code');
+                    });
+                }, 100);
+            });
+        });
+    </script>
+</body>
+
+</html>

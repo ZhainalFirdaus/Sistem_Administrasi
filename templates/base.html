@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Administrasi Dokumen</title>
+    <!-- Tailwind CSS & SweetAlert2 (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-indigo-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 flex-wrap">
+                <div class="flex items-center flex-shrink-0">
+                    <a href="{{ url_for('index') }}" class="font-bold text-xl tracking-tight">E-Administrasi</a>
+                </div>
+                <div class="flex items-center mt-2 sm:mt-0 space-x-4">
+                    {% if current_user.is_authenticated %}
+
+                    <!-- Notification Dropdown -->
+                    <div class="relative group ml-3">
+                        <button class="relative text-indigo-100 hover:text-white transition-colors p-1"
+                            onclick="markNotificationsRead()">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                            {% if unread_count > 0 %}
+                            <span id="unread-badge"
+                                class="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-indigo-600"></span>
+                            {% endif %}
+                        </button>
+                        <!-- Dropdown Content -->
+                        <div
+                            class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-2xl border border-gray-100 overflow-hidden z-20 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all transform origin-top-right scale-95 group-hover:scale-100 text-gray-800">
+                            <div
+                                class="px-4 py-2.5 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                                <h3 class="text-xs font-bold text-gray-600 uppercase tracking-widest">Notifikasi</h3>
+                                <span
+                                    class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full">{{
+                                    unread_count }}</span>
+                            </div>
+                            <div class="max-h-80 overflow-y-auto divide-y divide-gray-50">
+                                {% if notifications %}
+                                {% for n in notifications %}
+                                <a href="{{ n.link or '#' }}"
+                                    class="block px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer">
+                                    <p class="text-[13px] text-gray-700 leading-snug">{{ n.message }}</p>
+                                    <p class="text-[11px] text-gray-400 mt-1">{{ n.created_at.strftime('%H:%M') if
+                                        n.created_at.date() == n.created_at.now().date() else n.created_at.strftime('%d
+                                        %b') }}</p>
+                                </a>
+                                {% endfor %}
+                                {% else %}
+                                <div class="px-4 py-8 text-center text-gray-400 text-sm">Tidak ada notifikasi baru</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="mr-2 text-sm">Halo, {{ current_user.name or current_user.nrp }}</span>
+                    <a href="{{ url_for('logout') }}"
+                        class="bg-indigo-500 hover:bg-indigo-700 text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out shadow-sm">Logout</a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}"
+                        class="text-indigo-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                    <a href="{{ url_for('register') }}"
+                        class="bg-white text-indigo-600 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out shadow-sm">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 text-center py-4 mt-auto">
+        <p class="text-sm">&copy; 2024 Sistem Administrasi Dokumen. All rights reserved.</p>
+    </footer>
+    <!-- SweetAlert2 Initialization -->
+    <script>
+        function markNotificationsRead() {
+            fetch('/notifications/read', { method: 'POST' })
+                .then(() => {
+                    const badge = document.getElementById('unread-badge');
+                    if (badge) badge.remove();
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            Swal.fire({
+                icon: '{{ "success" if category == "success" else "error" if category == "error" else "warning" }}',
+                title: '{{ "Berhasil" if category == "success" else "Gagal" if category == "error" else "Perhatian" }}',
+                text: '{{ message }}',
+                confirmButtonColor: '#4f46e5',
+                confirmButtonText: 'Tutup'
+            });
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        });
+    </script>
+</body>
+
+</html>

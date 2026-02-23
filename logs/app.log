@@ -1,0 +1,410 @@
+2026-02-23 15:09:29,054 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 15:09:29,054 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 15:17:29,047 [INFO] 127.0.0.1 - - [23/Feb/2026 15:17:29] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-02-23 15:17:29,335 [INFO] 127.0.0.1 - - [23/Feb/2026 15:17:29] "GET /login?next=/dashboard HTTP/1.1" 200 -
+2026-02-23 15:24:46,106 [INFO] 127.0.0.1 - - [23/Feb/2026 15:24:46] "GET /login?next=/dashboard HTTP/1.1" 200 -
+2026-02-23 15:24:59,113 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 15:24:59,114 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 15:31:46,506 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 15:31:46,507 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 15:33:31,815 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 15:33:31,815 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 15:36:01,504 [INFO] 127.0.0.1 - - [23/Feb/2026 15:36:01] "GET / HTTP/1.1" 200 -
+2026-02-23 15:57:43,918 [INFO] 127.0.0.1 - - [23/Feb/2026 15:57:43] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 15:57:44,153 [INFO] 127.0.0.1 - - [23/Feb/2026 15:57:44] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 15:57:48,406 [INFO] 127.0.0.1 - - [23/Feb/2026 15:57:48] "GET /settings HTTP/1.1" 200 -
+2026-02-23 15:57:52,830 [INFO] 127.0.0.1 - - [23/Feb/2026 15:57:52] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 15:57:52,838 [INFO] 127.0.0.1 - - [23/Feb/2026 15:57:52] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:05:02,940 [INFO] 127.0.0.1 - - [23/Feb/2026 16:05:02] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:07:07,809 [INFO] 127.0.0.1 - - [23/Feb/2026 16:07:07] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:07:16,118 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 16:07:16,118 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 16:07:27,068 [INFO] 127.0.0.1 - - [23/Feb/2026 16:07:27] "GET / HTTP/1.1" 200 -
+2026-02-23 16:07:58,580 [INFO] 127.0.0.1 - - [23/Feb/2026 16:07:58] "GET /forgot-password HTTP/1.1" 200 -
+2026-02-23 16:08:01,942 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:01] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:08:19,370 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:19] "GET /register HTTP/1.1" 200 -
+2026-02-23 16:08:34,813 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:34] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:08:47,077 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:47] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:08:47,267 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:47] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:08:59,024 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:59] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:08:59,035 [INFO] 127.0.0.1 - - [23/Feb/2026 16:08:59] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:09:03,798 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:03] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:09:03,862 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:03] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:09:06,298 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:06] "[35m[1mPOST /notifications/read HTTP/1.1[0m" 204 -
+2026-02-23 16:09:06,640 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:06] "[35m[1mPOST /notifications/read HTTP/1.1[0m" 204 -
+2026-02-23 16:09:07,779 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:07] "GET /admin/users HTTP/1.1" 200 -
+2026-02-23 16:09:08,337 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:08] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:15,164 [ERROR] Exception on /admin/document/7 [GET]
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Sistem_Administrasi\app.py", line 589, in admin_document_review
+    return render_template('admin_document_review.html', document=document)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\Sistem_Administrasi\templates\admin_document_review.html", line 379, in top-level template code
+    {% set token = generate_file_token(document.file_path) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'generate_file_token' is undefined
+2026-02-23 16:09:15,309 [ERROR] Internal Server Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Sistem_Administrasi\app.py", line 589, in admin_document_review
+    return render_template('admin_document_review.html', document=document)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\Sistem_Administrasi\templates\admin_document_review.html", line 379, in top-level template code
+    {% set token = generate_file_token(document.file_path) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'generate_file_token' is undefined
+2026-02-23 16:09:15,403 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:15] "[35m[1mGET /admin/document/7 HTTP/1.1[0m" 500 -
+2026-02-23 16:09:31,408 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:31] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:32,719 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:32] "GET /admin/users HTTP/1.1" 200 -
+2026-02-23 16:09:34,102 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:34] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:09:39,630 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:39] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:40,376 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:40] "GET /admin/users HTTP/1.1" 200 -
+2026-02-23 16:09:41,251 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:41] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:09:44,994 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:44] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:45,023 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:45] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:45,043 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:45] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:47,319 [ERROR] Exception on /admin/document/7 [GET]
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Sistem_Administrasi\app.py", line 589, in admin_document_review
+    return render_template('admin_document_review.html', document=document)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\Sistem_Administrasi\templates\admin_document_review.html", line 379, in top-level template code
+    {% set token = generate_file_token(document.file_path) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'generate_file_token' is undefined
+2026-02-23 16:09:47,321 [ERROR] Internal Server Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Sistem_Administrasi\app.py", line 589, in admin_document_review
+    return render_template('admin_document_review.html', document=document)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\Sistem_Administrasi\templates\admin_document_review.html", line 379, in top-level template code
+    {% set token = generate_file_token(document.file_path) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'generate_file_token' is undefined
+2026-02-23 16:09:47,330 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:47] "[35m[1mGET /admin/document/7 HTTP/1.1[0m" 500 -
+2026-02-23 16:09:56,151 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:56] "[32mGET / HTTP/1.1[0m" 302 -
+2026-02-23 16:09:56,177 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:56] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:09:58,709 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:58] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:09:59,705 [ERROR] Exception on /admin/document/7 [GET]
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Sistem_Administrasi\app.py", line 589, in admin_document_review
+    return render_template('admin_document_review.html', document=document)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\Sistem_Administrasi\templates\admin_document_review.html", line 379, in top-level template code
+    {% set token = generate_file_token(document.file_path) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'generate_file_token' is undefined
+2026-02-23 16:09:59,707 [ERROR] Internal Server Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Sistem_Administrasi\app.py", line 589, in admin_document_review
+    return render_template('admin_document_review.html', document=document)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\Sistem_Administrasi\templates\admin_document_review.html", line 379, in top-level template code
+    {% set token = generate_file_token(document.file_path) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'generate_file_token' is undefined
+2026-02-23 16:09:59,714 [INFO] 127.0.0.1 - - [23/Feb/2026 16:09:59] "[35m[1mGET /admin/document/7 HTTP/1.1[0m" 500 -
+2026-02-23 16:10:01,184 [INFO] 127.0.0.1 - - [23/Feb/2026 16:10:01] "[32mGET / HTTP/1.1[0m" 302 -
+2026-02-23 16:10:01,207 [INFO] 127.0.0.1 - - [23/Feb/2026 16:10:01] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:13:39,075 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 16:13:39,076 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 16:13:39,101 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:39] "[32mGET /admin/dashboard HTTP/1.1[0m" 302 -
+2026-02-23 16:13:39,516 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:39] "GET /login?next=/admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:13:46,277 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:46] "POST /login HTTP/1.1" 200 -
+2026-02-23 16:13:53,570 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:53] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:13:53,679 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:53] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:13:56,504 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:56] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:13:58,645 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:58] "GET /admin/document/7 HTTP/1.1" 200 -
+2026-02-23 16:13:59,254 [INFO] 127.0.0.1 - - [23/Feb/2026 16:13:59] "GET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1" 200 -
+2026-02-23 16:14:00,189 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:00] "GET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1" 200 -
+2026-02-23 16:14:00,230 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:00] "[35m[1mGET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:14:00,240 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:00] "[35m[1mGET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:14:00,260 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:00] "[35m[1mGET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:14:00,336 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:00] "[35m[1mGET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:14:00,336 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:00] "[35m[1mGET /preview/Z0FBQUFBQnBuQnBWMGZkbjgwT0N5eUdlbjBoZTdxTm1vMGlneHI1SktFSDg4SF85MWdZT2xvc2ZNc3lBTGpQYjcwU210Vnc4ZUxZdV9TOW5IYnAxNUJscDRULWtIR0VpTVFMcllNVUtLSWdaNXJDWjVSbzZSeG1uN24xTEt2V0dQcEVNNzhOR0s1WmNsbWhzQjZFcS1qb2kyekRtbjlwR3VnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:14:07,368 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:07] "GET /admin/document/7 HTTP/1.1" 200 -
+2026-02-23 16:14:07,601 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:07] "GET /preview/Z0FBQUFBQnBuQnBmbTBUQ2tCdzROcWg3SjY1MjRTa0JFSk1lSzRhc0plN29ZVVFYZHlUeHA2N0otaUNVbURpWUUtdGNOU0YtRUpYZHdKYVZjbE9fc2RWZG85bHVDa2otS21GUFpxN0RyS3VPNjhtMjNZZUIwckpXd0d0Zk1MQlJTR0lJR0VSNmF3ZXFZcTdob0hyUVBiZUlXd0daOW5HTzd3PT0= HTTP/1.1" 200 -
+2026-02-23 16:14:17,973 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:17] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:14:19,434 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:19] "GET /admin/users HTTP/1.1" 200 -
+2026-02-23 16:14:20,414 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:20] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:14:22,171 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:22] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:14:23,664 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:23] "GET /admin/document/7 HTTP/1.1" 200 -
+2026-02-23 16:14:23,915 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:23] "GET /preview/Z0FBQUFBQnBuQnB2dl9Qb1FNcGlxRTdxZVRKMnJTSjYtUTdHbVdLY2RXRERnV1BNVWg1YkRyc3Y2R1FJYnl5aG9BNHZxUFZuY19RV0tzQkVETkxfanRESFU1My1lMVZmb2hHNUt1ZDJhWUZiVnZ0TWQ3dC1wRzhiSk03YnkzRHhDcG9FRU1zWkFzLURwUmlHc2NEMzlPcVhISEhtdU5SUURRPT0= HTTP/1.1" 200 -
+2026-02-23 16:14:27,786 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:27] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:14:30,607 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:30] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:14:30,616 [INFO] 127.0.0.1 - - [23/Feb/2026 16:14:30] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:18:21,090 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:21] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:18:29,666 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:29] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:18:29,833 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:29] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:18:33,732 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:33] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:18:42,450 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 16:18:42,450 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 16:18:51,089 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:51] "GET / HTTP/1.1" 200 -
+2026-02-23 16:18:57,349 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:57] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:18:57,393 [INFO] 127.0.0.1 - - [23/Feb/2026 16:18:57] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:19:25,943 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:25] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2026-02-23 16:19:25,959 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:25] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:19:31,705 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:31] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:19:31,715 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:31] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:19:34,878 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:34] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:19:34,944 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:34] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:19:39,275 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:39] "[35m[1mPOST /notifications/read HTTP/1.1[0m" 204 -
+2026-02-23 16:19:39,922 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:39] "GET /admin/document/8 HTTP/1.1" 200 -
+2026-02-23 16:19:40,466 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:40] "GET /preview/Z0FBQUFBQnBuQnVyRFd4azY4UGRwVVJ1MHFlelltRXU5Yk9GNk14NlVJdUpJdkNZdmZKdmVJVzAxekUzRTRMOFdfUHR3NjRieFlIaDI0YTh4T1FjeUM0aGZDNHY4bEwxaVlqZ2lwUjVyajlpcU1EaTBNOWhSZ0RjRHQ1cVN0bEY0VGlibDVMZkxDQ3lTTEhTVndsOXpRaUNtU2VCc1NZbUttUW5YN2pkZlVfQjNQS256TVFyX1ZnPQ== HTTP/1.1" 200 -
+2026-02-23 16:19:45,131 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:45] "[32mPOST /admin/update_document HTTP/1.1[0m" 302 -
+2026-02-23 16:19:45,170 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:45] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:19:49,799 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:49] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:19:51,029 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:51] "GET /admin/document/8 HTTP/1.1" 200 -
+2026-02-23 16:19:51,255 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:51] "GET /preview/Z0FBQUFBQnBuQnUzM19fNzZzVWxya2NYZDJrMkNKRkJOa1RkRmNqWXNtT1o3Wm5RZDBYc2FDZnFsVE5Kb1BnOXRMRTBTSTJqZVpJOVFzZDRZcWlnSnEzY0dSRklSbmxnQ09WMWwyS2NaTFJYNXZpREVuc3BiVkVSc2pBbnVYZmpxYTJYZ1dIUmVEQVFfUVlNOG5Kb1BZN2Q4WUl6SnlTZjZxdzRBVEpZcEZtS2ZJbkt3VmFZZzdNPQ== HTTP/1.1" 200 -
+2026-02-23 16:19:53,188 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:53] "[32mPOST /admin/update_document HTTP/1.1[0m" 302 -
+2026-02-23 16:19:54,450 [INFO] 127.0.0.1 - - [23/Feb/2026 16:19:54] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:20:02,310 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:02] "GET /admin/document/8 HTTP/1.1" 200 -
+2026-02-23 16:20:02,518 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:02] "GET /preview/Z0FBQUFBQnBuQnZDOU9fSWRIVDZ4MzlXYUxVZlFwZE1aTFBEZjVud1pjenpHdXhvbjFOREVNTnZua3dVSmxDVVoybEVMMVpzNjlsRzF2ZWgtLXZOaXg2QUVDcHphYndMSHMtNmVXS2pFcHVhYVRGYVpRaV80dEhKaDdsN3oyX2dnT3V2cGZoMExZU1pCQ3JteU01SXQtcHpCV2d6elBVb2R4VTBwejNVOGJHR3AyYWdxMzBWOUZnPQ== HTTP/1.1" 200 -
+2026-02-23 16:20:04,418 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:04] "[32mPOST /admin/update_document HTTP/1.1[0m" 302 -
+2026-02-23 16:20:04,441 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:04] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:20:10,162 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:10] "GET /admin/document/8 HTTP/1.1" 200 -
+2026-02-23 16:20:10,368 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:10] "GET /preview/Z0FBQUFBQnBuQnZLWWhVNTZ6cHN2SU02MmZkbkVoVkQwRFFiUTNnTDhwRWdFUGpiU0lNV0ZBOXNlNWtQRWpfVUNOX0RET3NUYzkxWTM1QWg2RVZ2R3ZtTko4Ul9Qa296eHRuZ3hxV1R1TmxoWDdLOGMzZTAwd3A2V1A1SzNyMmhVMGZYWlFBYmdfVEc3X1ZUSHBUQXBWU2plWUhjdThuS0oyeFM1bmdaUTNqUW83LW43SUtZYjlJPQ== HTTP/1.1" 200 -
+2026-02-23 16:20:15,727 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:15] "[32mPOST /admin/update_document HTTP/1.1[0m" 302 -
+2026-02-23 16:20:15,755 [INFO] 127.0.0.1 - - [23/Feb/2026 16:20:15] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:25:17,125 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 16:25:17,125 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 16:25:22,110 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:22] "[32mGET /admin/dashboard HTTP/1.1[0m" 302 -
+2026-02-23 16:25:22,193 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:22] "GET /login?next=/admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:25:30,331 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:30] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:25:30,398 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:30] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:25:34,249 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:34] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:25:34,261 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:34] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:25:37,615 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:37] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:25:37,649 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:37] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:25:42,841 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:42] "[32mPOST /delete_document/6 HTTP/1.1[0m" 302 -
+2026-02-23 16:25:42,857 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:42] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:25:49,201 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:49] "[32mPOST /delete_document/8 HTTP/1.1[0m" 302 -
+2026-02-23 16:25:49,220 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:49] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:25:56,727 [INFO] 127.0.0.1 - - [23/Feb/2026 16:25:56] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:26:03,640 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:03] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:26:03,652 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:03] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:26:08,894 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:08] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:26:08,914 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:08] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:26:12,804 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:12] "GET /admin/users HTTP/1.1" 200 -
+2026-02-23 16:26:13,425 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:13] "GET /admin/documents HTTP/1.1" 200 -
+2026-02-23 16:26:15,336 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:15] "GET /admin/document/7 HTTP/1.1" 200 -
+2026-02-23 16:26:15,742 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:15] "GET /preview/Z0FBQUFBQnBuQjAzYjdFNlNvcmxwM2xzT3RZUGtTMl9CNFJzNnMwdTNEM1c5UjFPYjhuWE1KaEwzNExaUFJjaUYtelNuN3NHZzFPV01nRndhQmtwTnRwRVJWTXNjVW1xenZtS2xBVWlJRTIxSnpwdFg5X2hRQW8zRVp0M1pLZ05SY2oyU2ZhT19ZYWJYRzNGNV9tRmF0TzBuODNyalhMQnlnPT0= HTTP/1.1" 200 -
+2026-02-23 16:26:16,083 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:16] "GET /preview/Z0FBQUFBQnBuQjAzYjdFNlNvcmxwM2xzT3RZUGtTMl9CNFJzNnMwdTNEM1c5UjFPYjhuWE1KaEwzNExaUFJjaUYtelNuN3NHZzFPV01nRndhQmtwTnRwRVJWTXNjVW1xenZtS2xBVWlJRTIxSnpwdFg5X2hRQW8zRVp0M1pLZ05SY2oyU2ZhT19ZYWJYRzNGNV9tRmF0TzBuODNyalhMQnlnPT0= HTTP/1.1" 200 -
+2026-02-23 16:26:16,529 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:16] "[35m[1mGET /preview/Z0FBQUFBQnBuQjAzYjdFNlNvcmxwM2xzT3RZUGtTMl9CNFJzNnMwdTNEM1c5UjFPYjhuWE1KaEwzNExaUFJjaUYtelNuN3NHZzFPV01nRndhQmtwTnRwRVJWTXNjVW1xenZtS2xBVWlJRTIxSnpwdFg5X2hRQW8zRVp0M1pLZ05SY2oyU2ZhT19ZYWJYRzNGNV9tRmF0TzBuODNyalhMQnlnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:26:16,529 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:16] "[35m[1mGET /preview/Z0FBQUFBQnBuQjAzYjdFNlNvcmxwM2xzT3RZUGtTMl9CNFJzNnMwdTNEM1c5UjFPYjhuWE1KaEwzNExaUFJjaUYtelNuN3NHZzFPV01nRndhQmtwTnRwRVJWTXNjVW1xenZtS2xBVWlJRTIxSnpwdFg5X2hRQW8zRVp0M1pLZ05SY2oyU2ZhT19ZYWJYRzNGNV9tRmF0TzBuODNyalhMQnlnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:26:16,581 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:16] "[35m[1mGET /preview/Z0FBQUFBQnBuQjAzYjdFNlNvcmxwM2xzT3RZUGtTMl9CNFJzNnMwdTNEM1c5UjFPYjhuWE1KaEwzNExaUFJjaUYtelNuN3NHZzFPV01nRndhQmtwTnRwRVJWTXNjVW1xenZtS2xBVWlJRTIxSnpwdFg5X2hRQW8zRVp0M1pLZ05SY2oyU2ZhT19ZYWJYRzNGNV9tRmF0TzBuODNyalhMQnlnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:26:16,581 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:16] "[35m[1mGET /preview/Z0FBQUFBQnBuQjAzYjdFNlNvcmxwM2xzT3RZUGtTMl9CNFJzNnMwdTNEM1c5UjFPYjhuWE1KaEwzNExaUFJjaUYtelNuN3NHZzFPV01nRndhQmtwTnRwRVJWTXNjVW1xenZtS2xBVWlJRTIxSnpwdFg5X2hRQW8zRVp0M1pLZ05SY2oyU2ZhT19ZYWJYRzNGNV9tRmF0TzBuODNyalhMQnlnPT0= HTTP/1.1[0m" 206 -
+2026-02-23 16:26:18,258 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:18] "[32mPOST /admin/update_document HTTP/1.1[0m" 302 -
+2026-02-23 16:26:18,350 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:18] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-23 16:26:32,633 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:32] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:26:32,652 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:32] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:26:40,626 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:40] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:26:40,645 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:40] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:26:41,902 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:41] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:26:44,166 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:44] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:26:46,274 [INFO] 127.0.0.1 - - [23/Feb/2026 16:26:46] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:27:07,065 [INFO] 127.0.0.1 - - [23/Feb/2026 16:27:07] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-23 16:27:07,083 [INFO] 127.0.0.1 - - [23/Feb/2026 16:27:07] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:27:09,854 [INFO] 127.0.0.1 - - [23/Feb/2026 16:27:09] "GET /forgot-password HTTP/1.1" 200 -
+2026-02-23 16:27:25,943 [INFO] 127.0.0.1 - - [23/Feb/2026 16:27:25] "POST /forgot-password HTTP/1.1" 200 -
+2026-02-23 16:27:41,153 [INFO] 127.0.0.1 - - [23/Feb/2026 16:27:41] "[32mPOST /forgot-password HTTP/1.1[0m" 302 -
+2026-02-23 16:27:41,161 [INFO] 127.0.0.1 - - [23/Feb/2026 16:27:41] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:31:39,405 [INFO] 127.0.0.1 - - [23/Feb/2026 16:31:39] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:31:42,003 [INFO] 127.0.0.1 - - [23/Feb/2026 16:31:42] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:31:42,318 [INFO] 127.0.0.1 - - [23/Feb/2026 16:31:42] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:31:42,533 [INFO] 127.0.0.1 - - [23/Feb/2026 16:31:42] "GET /login HTTP/1.1" 200 -
+2026-02-23 16:32:39,429 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 16:32:39,429 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 16:32:43,111 [INFO] 127.0.0.1 - - [23/Feb/2026 16:32:43] "GET / HTTP/1.1" 200 -
+2026-02-23 16:32:51,747 [INFO] 127.0.0.1 - - [23/Feb/2026 16:32:51] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:32:54,563 [INFO] 127.0.0.1 - - [23/Feb/2026 16:32:54] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:33:01,105 [INFO] 127.0.0.1 - - [23/Feb/2026 16:33:01] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:36:13,991 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:13] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:36:16,808 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:16] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:36:18,086 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:18] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:36:21,098 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:21] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:36:30,123 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-23 16:36:30,124 [INFO] [33mPress CTRL+C to quit[0m
+2026-02-23 16:36:31,687 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:31] "GET / HTTP/1.1" 200 -
+2026-02-23 16:36:37,075 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:37] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-23 16:36:37,114 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:37] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:36:38,190 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:38] "GET /settings HTTP/1.1" 200 -
+2026-02-23 16:36:42,954 [INFO] 127.0.0.1 - - [23/Feb/2026 16:36:42] "GET /dashboard HTTP/1.1" 200 -
+2026-02-23 16:41:13,415 [INFO] 127.0.0.1 - - [23/Feb/2026 16:41:13] "GET /dashboard HTTP/1.1" 200 -
