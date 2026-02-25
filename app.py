@@ -43,36 +43,19 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Proteksi dasar CSRF
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # Sesi kadaluarsa setelah 1 jam
 
 # Konfigurasi Database (baca dari .env atau Railway Variable)
-print("\n--- DEBUGGING DATABASE CONNECTION ---")
-
-# 1. Cek variabel URL (Sangat disarankan untuk Railway)
 db_url = os.environ.get('DATABASE_URL') or os.environ.get('MYSQL_URL')
 if db_url:
-    print("✅ Variabel URL ditemukan (DATABASE_URL/MYSQL_URL)")
-    # Railway sering memberi prefix 'mysql://', SQLAlchemy butuh 'mysql+pymysql://'
     if db_url.startswith('mysql://'):
         db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 else:
-    print("❌ Variabel URL tidak ditemukan.")
-    # 2. Cek variabel individual (Host, User, Password, dsb)
-    # Railway menyediakan MYSQLHOST, MYSQLPORT secara default jika service database tersambung
     db_host = os.environ.get('MYSQLHOST') or os.environ.get('DB_HOST', 'localhost')
     db_user = os.environ.get('MYSQLUSER') or os.environ.get('DB_USER', 'root')
     db_password = os.environ.get('MYSQLPASSWORD') or os.environ.get('DB_PASSWORD', '')
     db_name = os.environ.get('MYSQLDATABASE') or os.environ.get('DB_NAME', 'db_administrasi')
     db_port = os.environ.get('MYSQLPORT', '3306')
-
-    if os.environ.get('MYSQLHOST'):
-        print(f"✅ Variabel Railway individual ditemukan (MYSQLHOST={db_host})")
-    else:
-        print(f"⚠️ Variabel Railway individual tidak ditemukan. Menggunakan fallback: {db_host}")
-
     mysql_uri = f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
     app.config['SQLALCHEMY_DATABASE_URI'] = mysql_uri
-
-print(f"🔗 Final Target: {app.config['SQLALCHEMY_DATABASE_URI'].split('@')[-1]}")
-print("--------------------------------------\n")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -234,13 +217,20 @@ def allowed_file(filename):
 def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
-        # Debugging koneksi (tanpa membocorkan password)
+        print("\n--- [DEBUG] PENGECEKAN KONEKSI DATABASE ---", flush=True)
+        # 1. Cek semua Keys yang tersedia (untuk tahu variabel apa saja yang masuk)
+        all_keys = list(os.environ.keys())
+        print(f"ℹ️ Env Vars Found: {[k for k in all_keys if 'MYSQL' in k or 'DATABASE' in k or 'PORT' in k]}", flush=True)
+        
+        # 2. Cek URI final
         uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
         if '@' in uri:
             part = uri.split('@')[-1]
-            print(f"ℹ️ Mencoba menyambung ke database di: {part}")
+            print(f"🔗 Target: {part}", flush=True)
         
         db.create_all()
+        print("✅ Database ready.", flush=True)
+        print("------------------------------------------\n", flush=True)
         # Buat akun admin default jika belum ada
         admin_user = User.query.filter_by(nrp='admin').first()
         if not admin_user:
