@@ -255,8 +255,17 @@ def initialize_database():
         print(f"⚠️ Peringatan inisialisasi database: {e}", flush=True)
         db.session.rollback()
 
-with app.app_context():
-    initialize_database()
+# Flag global untuk melacak apakah DB sudah diinisialisasi
+_db_initialized = False
+
+@app.before_request
+def before_first_request_func():
+    """Jalankan inisialisasi database hanya satu kali saat request pertama datang."""
+    global _db_initialized
+    if not _db_initialized:
+        with app.app_context():
+            initialize_database()
+        _db_initialized = True
 
 
 
