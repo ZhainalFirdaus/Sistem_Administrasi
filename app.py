@@ -42,13 +42,24 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True   # Cegah akses cookie via JavaScri
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Proteksi dasar CSRF
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # Sesi kadaluarsa setelah 1 jam
 
-# Konfigurasi Database (baca dari .env)
-db_host = os.environ.get('DB_HOST', 'localhost')
-db_user = os.environ.get('DB_USER', 'root')
-db_password = os.environ.get('DB_PASSWORD', '')
-db_name = os.environ.get('DB_NAME', 'db_administrasi')
-mysql_uri = f'mysql+pymysql://{db_user}:{db_password}@{db_host}/'
-app.config['SQLALCHEMY_DATABASE_URI'] = mysql_uri + db_name
+# Konfigurasi Database (baca dari .env atau Railway Variable)
+# Cek apakah ada URL koneksi lengkap (biasanya disediakan Railway)
+db_url = os.environ.get('DATABASE_URL') or os.environ.get('MYSQL_URL')
+
+if db_url:
+    # Railway sering memberi prefix 'mysql://', SQLAlchemy butuh 'mysql+pymysql://'
+    if db_url.startswith('mysql://'):
+        db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+else:
+    # Fallback ke komponen individual jika URL tidak ada
+    db_host = os.environ.get('DB_HOST', 'localhost')
+    db_user = os.environ.get('DB_USER', 'root')
+    db_password = os.environ.get('DB_PASSWORD', '')
+    db_name = os.environ.get('DB_NAME', 'db_administrasi')
+    mysql_uri = f'mysql+pymysql://{db_user}:{db_password}@{db_host}/'
+    app.config['SQLALCHEMY_DATABASE_URI'] = mysql_uri + db_name
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Konfigurasi Upload
@@ -209,6 +220,12 @@ def allowed_file(filename):
 def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
+        # Debugging koneksi (tanpa membocorkan password)
+        uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
+        if '@' in uri:
+            part = uri.split('@')[-1]
+            print(f"ℹ️ Mencoba menyambung ke database di: {part}")
+        
         db.create_all()
         # Buat akun admin default jika belum ada
         admin_user = User.query.filter_by(nrp='admin').first()
