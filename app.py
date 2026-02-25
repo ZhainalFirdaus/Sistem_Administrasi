@@ -266,6 +266,12 @@ def before_first_request_func():
         _db_initialized = True
         initialize_database()
 
+@app.after_request
+def after_request_func(response):
+    """Log setiap response yang dikirim."""
+    print(f"<<< RESPONSE: {request.path} -> {response.status_code}", flush=True)
+    return response
+
 @app.errorhandler(500)
 def handle_500(e):
     """Tangkap error 500 dan log ke console."""
@@ -282,8 +288,9 @@ def handle_exception(e):
 
 @app.route('/health')
 def health_check():
-    """Endpoint untuk healthcheck Railway."""
-    return {"status": "healthy", "database": "connected"}, 200
+    """Endpoint untuk healthcheck Railway — respons paling ringan."""
+    print(">>> /health responding OK", flush=True)
+    return 'OK', 200, {'Content-Type': 'text/plain'}
 
 @app.route('/')
 def index():
