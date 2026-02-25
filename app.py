@@ -228,25 +228,34 @@ def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
         print("\n--- [DEBUG] PENGECEKAN KONEKSI DATABASE ---", flush=True)
-        # 1. Cek variabel yang tersedia
+        # 1. Cek variabel yang tersedia (kunci saja)
         all_keys = [k for k in os.environ.keys() if 'MYSQL' in k or 'DATABASE' in k]
-        print(f"ℹ️ Env Vars: {all_keys}", flush=True)
+        print(f"ℹ️ Env Vars Found: {all_keys}", flush=True)
         
-        # 2. Cek nilai awal (sensor password)
-        raw_url = os.environ.get('MYSQL_URL', '')
-        if raw_url:
-            print(f"ℹ️ MYSQL_URL starts with: {raw_url[:10]}...", flush=True)
+        # 2. Cek nilai MYSQL_URL secara spesifik (deteksi empty/interpolation failure)
+        m_url = os.environ.get('MYSQL_URL', '')
+        d_url = os.environ.get('DATABASE_URL', '')
         
+        if m_url:
+            print(f"ℹ️ MYSQL_URL detected (len={len(m_url)})", flush=True)
+            if m_url.startswith('${{'):
+                print("⚠️ WARNING: MYSQL_URL looks like an un-interpolated template! Check Railway service name.", flush=True)
+        else:
+            print("❌ MYSQL_URL is EMPTY or Missing.", flush=True)
+
+        if d_url:
+            print(f"ℹ️ DATABASE_URL detected (len={len(d_url)})", flush=True)
+
         # 3. Cek URI final yang digunakan SQLAlchemy
         uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
         if '@' in uri:
             target_part = uri.split('@')[-1]
-            print(f"🔗 SQLAlchemy Target: {target_part}", flush=True)
+            print(f"🔗 Final Target: {target_part}", flush=True)
         else:
-            print(f"🔗 SQLAlchemy URI: {uri}", flush=True)
+            print(f"🔗 Final URI: {uri}", flush=True)
         
         db.create_all()
-        print("✅ Database ready.", flush=True)
+        print("✅ Database connection successful.", flush=True)
         print("------------------------------------------\n", flush=True)
         # Buat akun admin default jika belum ada
         admin_user = User.query.filter_by(nrp='admin').first()
