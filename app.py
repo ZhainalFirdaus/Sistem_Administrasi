@@ -43,17 +43,27 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Proteksi dasar CSRF
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # Sesi kadaluarsa setelah 1 jam
 
 # Konfigurasi Database (baca dari .env atau Railway Variable)
-db_url = os.environ.get('DATABASE_URL') or os.environ.get('MYSQL_URL')
-if db_url:
+# Gunakan strip() untuk mencegah spasi kosong yang tidak sengaja
+db_url = os.environ.get('MYSQL_URL', '').strip() or os.environ.get('DATABASE_URL', '').strip()
+
+if db_url and db_url.lower() != 'none':
+    # Pastikan formatnya mysql+pymysql:// agar SQLAlchemy bisa jalan
     if db_url.startswith('mysql://'):
         db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
+    elif not db_url.startswith('mysql+pymysql://'):
+        # Jika tidak ada prefix sama sekali, kita asumsikan ini URL mentah
+        pass
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 else:
+    # Fallback jika URL tidak ada, coba ambil komponen satu per satu
+    # Railway sering menyediakan MYSQLHOST, MYSQLUSER, dll secara otomatis
     db_host = os.environ.get('MYSQLHOST') or os.environ.get('DB_HOST', 'localhost')
     db_user = os.environ.get('MYSQLUSER') or os.environ.get('DB_USER', 'root')
     db_password = os.environ.get('MYSQLPASSWORD') or os.environ.get('DB_PASSWORD', '')
     db_name = os.environ.get('MYSQLDATABASE') or os.environ.get('DB_NAME', 'db_administrasi')
     db_port = os.environ.get('MYSQLPORT', '3306')
+    
+    # Konstruksi manual dengan pymysql driver
     mysql_uri = f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
     app.config['SQLALCHEMY_DATABASE_URI'] = mysql_uri
 
@@ -218,15 +228,22 @@ def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
         print("\n--- [DEBUG] PENGECEKAN KONEKSI DATABASE ---", flush=True)
-        # 1. Cek semua Keys yang tersedia (untuk tahu variabel apa saja yang masuk)
-        all_keys = list(os.environ.keys())
-        print(f"ℹ️ Env Vars Found: {[k for k in all_keys if 'MYSQL' in k or 'DATABASE' in k or 'PORT' in k]}", flush=True)
+        # 1. Cek variabel yang tersedia
+        all_keys = [k for k in os.environ.keys() if 'MYSQL' in k or 'DATABASE' in k]
+        print(f"ℹ️ Env Vars: {all_keys}", flush=True)
         
-        # 2. Cek URI final
+        # 2. Cek nilai awal (sensor password)
+        raw_url = os.environ.get('MYSQL_URL', '')
+        if raw_url:
+            print(f"ℹ️ MYSQL_URL starts with: {raw_url[:10]}...", flush=True)
+        
+        # 3. Cek URI final yang digunakan SQLAlchemy
         uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
         if '@' in uri:
-            part = uri.split('@')[-1]
-            print(f"🔗 Target: {part}", flush=True)
+            target_part = uri.split('@')[-1]
+            print(f"🔗 SQLAlchemy Target: {target_part}", flush=True)
+        else:
+            print(f"🔗 SQLAlchemy URI: {uri}", flush=True)
         
         db.create_all()
         print("✅ Database ready.", flush=True)
