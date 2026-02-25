@@ -227,47 +227,33 @@ def allowed_file(filename):
 def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
-        # Cek variabel (kunci saja)
-        all_keys = [k for k in os.environ.keys() if 'MYSQL' in k or 'DATABASE' in k or 'PORT' in k]
-        
-        # 3. Cek URI final yang digunakan SQLAlchemy
+        # 1. Cek URI target (untuk log)
         uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
         short_uri = uri.split('@')[-1] if '@' in uri else uri
-        
         print(f"--- [DATABASE INIT] Target: {short_uri} ---", flush=True)
         
-        # Buat tabel (tidak akan error jika sudah ada)
+        # 2. Sinkronisasi Tabel (CREATE TABLE IF NOT EXISTS)
         db.create_all()
         
-        # Buat akun admin default jika belum ada
-        admin_user = User.query.filter_by(nrp='admin').first()
-        if not admin_user:
-            hashed_password = generate_password_hash('admin123')
-            new_admin = User(name='Administrator', nrp='admin', password_hash=hashed_password, role='admin')
-            db.session.add(new_admin)
-            db.session.commit()
-            print("✅ Admin default created.", flush=True)
-        
-        print("✅ Database connection & sync successful.", flush=True)
-    except Exception as e:
-        print(f"⚠️ Database Init Error: {e}", flush=True)
-        # Buat akun admin default jika belum ada
+        # 3. Buat admin default jika belum ada
         admin_user = User.query.filter_by(nrp='admin').first()
         if not admin_user:
             hashed_password = generate_password_hash('admin123')
             new_admin = User(
-                name='Administrator',
-                nrp='admin',
-                password_hash=hashed_password,
+                name='Administrator', 
+                nrp='admin', 
+                password_hash=hashed_password, 
                 role='admin'
             )
             db.session.add(new_admin)
             db.session.commit()
-            print("✅ Akun admin default berhasil dibuat! (NRP: admin, Password: admin123)")
-        else:
-            print("✅ Database siap.")
+            print("✅ Admin default created (NRP: admin, Pass: admin123).", flush=True)
+        
+        print("✅ Database connection & sync successful.", flush=True)
     except Exception as e:
-        print(f"⚠️ Peringatan inisialisasi database: {e}")
+        # Jangan biarkan aplikasi crash hanya karena DB sedang sirkulasi/restart
+        print(f"⚠️ Peringatan inisialisasi database: {e}", flush=True)
+        db.session.rollback()
 
 with app.app_context():
     initialize_database()
