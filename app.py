@@ -254,18 +254,29 @@ _db_initialized = False
 
 @app.before_request
 def before_first_request_func():
-    """Jalankan inisialisasi database hanya satu kali saat request non-health pertama datang."""
+    """Log semua request dan jalankan inisialisasi database satu kali."""
     global _db_initialized
+    print(f">>> REQUEST: {request.method} {request.path}", flush=True)
     
     # Skip inisialisasi untuk healthcheck agar Railway tidak timeout
     if request.path == '/health':
         return
 
-    # Jalankan inisialisasi hanya satu kali
-    # CATATAN: before_request sudah berjalan dalam app context, jangan buat context baru!
     if not _db_initialized:
-        _db_initialized = True  # Set dulu agar tidak dijalankan dua kali meski ada error
+        _db_initialized = True
         initialize_database()
+
+@app.errorhandler(500)
+def handle_500(e):
+    """Tangkap error 500 dan log ke console."""
+    print(f"!!! ERROR 500: {e}", flush=True)
+    return {"error": "Internal Server Error", "detail": str(e)}, 500
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """Tangkap semua exception dan log ke console."""
+    print(f"!!! UNHANDLED EXCEPTION: {type(e).__name__}: {e}", flush=True)
+    return {"error": str(e)}, 500
 
 
 
@@ -277,6 +288,7 @@ def health_check():
 @app.route('/')
 def index():
     """Halaman utama, redirect ke dashboard jika sudah login."""
+    print(">>> ROUTE / hit", flush=True)
     if current_user.is_authenticated:
         if current_user.role == 'admin':
             return redirect(url_for('admin_dashboard'))
