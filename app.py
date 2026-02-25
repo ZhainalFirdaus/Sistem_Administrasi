@@ -43,22 +43,36 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Proteksi dasar CSRF
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # Sesi kadaluarsa setelah 1 jam
 
 # Konfigurasi Database (baca dari .env atau Railway Variable)
-# Cek apakah ada URL koneksi lengkap (biasanya disediakan Railway)
-db_url = os.environ.get('DATABASE_URL') or os.environ.get('MYSQL_URL')
+print("\n--- DEBUGGING DATABASE CONNECTION ---")
 
+# 1. Cek variabel URL (Sangat disarankan untuk Railway)
+db_url = os.environ.get('DATABASE_URL') or os.environ.get('MYSQL_URL')
 if db_url:
+    print("✅ Variabel URL ditemukan (DATABASE_URL/MYSQL_URL)")
     # Railway sering memberi prefix 'mysql://', SQLAlchemy butuh 'mysql+pymysql://'
     if db_url.startswith('mysql://'):
         db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 else:
-    # Fallback ke komponen individual jika URL tidak ada
-    db_host = os.environ.get('DB_HOST', 'localhost')
-    db_user = os.environ.get('DB_USER', 'root')
-    db_password = os.environ.get('DB_PASSWORD', '')
-    db_name = os.environ.get('DB_NAME', 'db_administrasi')
-    mysql_uri = f'mysql+pymysql://{db_user}:{db_password}@{db_host}/'
-    app.config['SQLALCHEMY_DATABASE_URI'] = mysql_uri + db_name
+    print("❌ Variabel URL tidak ditemukan.")
+    # 2. Cek variabel individual (Host, User, Password, dsb)
+    # Railway menyediakan MYSQLHOST, MYSQLPORT secara default jika service database tersambung
+    db_host = os.environ.get('MYSQLHOST') or os.environ.get('DB_HOST', 'localhost')
+    db_user = os.environ.get('MYSQLUSER') or os.environ.get('DB_USER', 'root')
+    db_password = os.environ.get('MYSQLPASSWORD') or os.environ.get('DB_PASSWORD', '')
+    db_name = os.environ.get('MYSQLDATABASE') or os.environ.get('DB_NAME', 'db_administrasi')
+    db_port = os.environ.get('MYSQLPORT', '3306')
+
+    if os.environ.get('MYSQLHOST'):
+        print(f"✅ Variabel Railway individual ditemukan (MYSQLHOST={db_host})")
+    else:
+        print(f"⚠️ Variabel Railway individual tidak ditemukan. Menggunakan fallback: {db_host}")
+
+    mysql_uri = f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = mysql_uri
+
+print(f"🔗 Final Target: {app.config['SQLALCHEMY_DATABASE_URI'].split('@')[-1]}")
+print("--------------------------------------\n")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
