@@ -257,15 +257,15 @@ def before_first_request_func():
     """Jalankan inisialisasi database hanya satu kali saat request non-health pertama datang."""
     global _db_initialized
     
-    # JANGAN jalankan inisialisasi jika Railway cuma panggil /health
-    # Ini memastikan healthcheck merespon instan tanpa kena timeout DB startup
+    # Skip inisialisasi untuk healthcheck agar Railway tidak timeout
     if request.path == '/health':
         return
 
+    # Jalankan inisialisasi hanya satu kali
+    # CATATAN: before_request sudah berjalan dalam app context, jangan buat context baru!
     if not _db_initialized:
-        with app.app_context():
-            initialize_database()
-        _db_initialized = True
+        _db_initialized = True  # Set dulu agar tidak dijalankan dua kali meski ada error
+        initialize_database()
 
 
 
