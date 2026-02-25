@@ -227,37 +227,30 @@ def allowed_file(filename):
 def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
-        print("\n--- [DEBUG] PENGECEKAN KONEKSI DATABASE ---", flush=True)
-        # 1. Cek variabel yang tersedia (kunci saja)
+        # Cek variabel (kunci saja)
         all_keys = [k for k in os.environ.keys() if 'MYSQL' in k or 'DATABASE' in k or 'PORT' in k]
-        print(f"ℹ️ Env Vars Found: {all_keys}", flush=True)
-        print(f"ℹ️ PORT Value: {os.environ.get('PORT', 'Not Set (using 8080 fallback)')}", flush=True)
         
-        # 2. Cek nilai MYSQL_URL secara spesifik (deteksi empty/interpolation failure)
-        m_url = os.environ.get('MYSQL_URL', '')
-        d_url = os.environ.get('DATABASE_URL', '')
-        
-        if m_url:
-            print(f"ℹ️ MYSQL_URL detected (len={len(m_url)})", flush=True)
-            if m_url.startswith('${{'):
-                print("⚠️ WARNING: MYSQL_URL looks like an un-interpolated template! Check Railway service name.", flush=True)
-        else:
-            print("❌ MYSQL_URL is EMPTY or Missing.", flush=True)
-
-        if d_url:
-            print(f"ℹ️ DATABASE_URL detected (len={len(d_url)})", flush=True)
-
         # 3. Cek URI final yang digunakan SQLAlchemy
         uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
-        if '@' in uri:
-            target_part = uri.split('@')[-1]
-            print(f"🔗 Final Target: {target_part}", flush=True)
-        else:
-            print(f"🔗 Final URI: {uri}", flush=True)
+        short_uri = uri.split('@')[-1] if '@' in uri else uri
         
+        print(f"--- [DATABASE INIT] Target: {short_uri} ---", flush=True)
+        
+        # Buat tabel (tidak akan error jika sudah ada)
         db.create_all()
-        print("✅ Database connection successful.", flush=True)
-        print("------------------------------------------\n", flush=True)
+        
+        # Buat akun admin default jika belum ada
+        admin_user = User.query.filter_by(nrp='admin').first()
+        if not admin_user:
+            hashed_password = generate_password_hash('admin123')
+            new_admin = User(name='Administrator', nrp='admin', password_hash=hashed_password, role='admin')
+            db.session.add(new_admin)
+            db.session.commit()
+            print("✅ Admin default created.", flush=True)
+        
+        print("✅ Database connection & sync successful.", flush=True)
+    except Exception as e:
+        print(f"⚠️ Database Init Error: {e}", flush=True)
         # Buat akun admin default jika belum ada
         admin_user = User.query.filter_by(nrp='admin').first()
         if not admin_user:
@@ -280,6 +273,11 @@ with app.app_context():
     initialize_database()
 
 
+
+@app.route('/health')
+def health_check():
+    """Endpoint untuk healthcheck Railway."""
+    return {"status": "healthy", "database": "connected"}, 200
 
 @app.route('/')
 def index():
