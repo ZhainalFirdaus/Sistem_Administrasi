@@ -203,8 +203,35 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ====================
-# ROUTES
+# INISIALISASI DATABASE
+# Dijalankan saat app pertama kali dimuat (termasuk oleh gunicorn di Railway)
 # ====================
+def initialize_database():
+    """Buat tabel dan admin default jika belum ada."""
+    try:
+        db.create_all()
+        # Buat akun admin default jika belum ada
+        admin_user = User.query.filter_by(nrp='admin').first()
+        if not admin_user:
+            hashed_password = generate_password_hash('admin123')
+            new_admin = User(
+                name='Administrator',
+                nrp='admin',
+                password_hash=hashed_password,
+                role='admin'
+            )
+            db.session.add(new_admin)
+            db.session.commit()
+            print("✅ Akun admin default berhasil dibuat! (NRP: admin, Password: admin123)")
+        else:
+            print("✅ Database siap.")
+    except Exception as e:
+        print(f"⚠️ Peringatan inisialisasi database: {e}")
+
+with app.app_context():
+    initialize_database()
+
+
 
 @app.route('/')
 def index():
