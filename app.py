@@ -229,8 +229,9 @@ def initialize_database():
     try:
         print("\n--- [DEBUG] PENGECEKAN KONEKSI DATABASE ---", flush=True)
         # 1. Cek variabel yang tersedia (kunci saja)
-        all_keys = [k for k in os.environ.keys() if 'MYSQL' in k or 'DATABASE' in k]
+        all_keys = [k for k in os.environ.keys() if 'MYSQL' in k or 'DATABASE' in k or 'PORT' in k]
         print(f"ℹ️ Env Vars Found: {all_keys}", flush=True)
+        print(f"ℹ️ PORT Value: {os.environ.get('PORT', 'Not Set (using 8080 fallback)')}", flush=True)
         
         # 2. Cek nilai MYSQL_URL secara spesifik (deteksi empty/interpolation failure)
         m_url = os.environ.get('MYSQL_URL', '')
@@ -1001,7 +1002,8 @@ if __name__ == '__main__':
     print("  🌐 Akses di: http://127.0.0.1:5000")
     print("  📌 Tekan Ctrl+C untuk menghentikan server")
     print("="*50 + "\n")
-    # Gunakan PORT dari environment variable (Railway) atau default 5000 (lokal)
-    port = int(os.environ.get('PORT', 5000))
-    host = '0.0.0.0' if os.environ.get('PORT') else '127.0.0.1'
+    # Gunakan PORT dari environment variable (Railway) atau default 8080 (seperti permintaan user)
+    port = int(os.environ.get('PORT', 8080))
+    host = '0.0.0.0'
+    print(f"🚀 Memulai server di {host}:{port}")
     app.run(host=host, port=port, debug=False)
