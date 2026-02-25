@@ -98,14 +98,12 @@ limiter = Limiter(
 )
 
 # -------------------------------------------------------
-# KEAMANAN: Logging Error ke File
+# KEAMANAN: Logging ke Console (untuk Cloud/Railway Dashboard)
 # -------------------------------------------------------
-if not os.path.exists('logs'):
-    os.makedirs('logs')
 logging.basicConfig(
-    filename='logs/app.log',
-    level=logging.WARNING,
-    format='%(asctime)s [%(levelname)s] %(message)s'
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[logging.StreamHandler()] # Kirim log ke console agar muncul di Railway logs
 )
 
 # -------------------------------------------------------
@@ -227,15 +225,12 @@ def allowed_file(filename):
 def initialize_database():
     """Buat tabel dan admin default jika belum ada."""
     try:
-        # 1. Cek URI target (untuk log)
         uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
         short_uri = uri.split('@')[-1] if '@' in uri else uri
-        print(f"--- [DATABASE INIT] Target: {short_uri} ---", flush=True)
+        print(f"--- [DATABASE INIT] Started: {short_uri} ---", flush=True)
         
-        # 2. Sinkronisasi Tabel (CREATE TABLE IF NOT EXISTS)
         db.create_all()
         
-        # 3. Buat admin default jika belum ada
         admin_user = User.query.filter_by(nrp='admin').first()
         if not admin_user:
             hashed_password = generate_password_hash('admin123')
@@ -247,12 +242,11 @@ def initialize_database():
             )
             db.session.add(new_admin)
             db.session.commit()
-            print("✅ Admin default created (NRP: admin, Pass: admin123).", flush=True)
+            print("✅ Admin default created.", flush=True)
         
-        print("✅ Database connection & sync successful.", flush=True)
+        print("✅ [DATABASE INIT] Finished successfully.", flush=True)
     except Exception as e:
-        # Jangan biarkan aplikasi crash hanya karena DB sedang sirkulasi/restart
-        print(f"⚠️ Peringatan inisialisasi database: {e}", flush=True)
+        print(f"⚠️ [DATABASE INIT] Error: {e}", flush=True)
         db.session.rollback()
 
 # Flag global untuk melacak apakah DB sudah diinisialisasi
@@ -260,8 +254,14 @@ _db_initialized = False
 
 @app.before_request
 def before_first_request_func():
-    """Jalankan inisialisasi database hanya satu kali saat request pertama datang."""
+    """Jalankan inisialisasi database hanya satu kali saat request non-health pertama datang."""
     global _db_initialized
+    
+    # JANGAN jalankan inisialisasi jika Railway cuma panggil /health
+    # Ini memastikan healthcheck merespon instan tanpa kena timeout DB startup
+    if request.path == '/health':
+        return
+
     if not _db_initialized:
         with app.app_context():
             initialize_database()
